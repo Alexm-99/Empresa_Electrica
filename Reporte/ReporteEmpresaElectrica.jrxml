@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteEmpresaElectrica" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0598f433-a9c5-48ed-82ec-2f269922b10c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     *FROM
+     "cliente" cliente INNER JOIN "factura" factura ON cliente."id_cliente" = factura."id_cliente"
+     INNER JOIN "detalle_factura" detalle_factura ON factura."id_factura" = detalle_factura."id_factura"
+     INNER JOIN tarifa on tarifa.id_cliente = cliente.id_cliente
+    inner join valor_transaccional on valor_transaccional.id_tarifa = tarifa.id_tarifa
+     where cliente.id_cliente = 'C01'  and  valor_transaccional.estadocuenta = 'DEBE';]]>
+	</queryString>
+	<field name="id_persona" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellido" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="correo" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="fecha_nacimiento" class="java.sql.Date"/>
+	<field name="id_login" class="java.lang.String"/>
+	<field name="id_cliente" class="java.lang.String"/>
+	<field name="provincia" class="java.lang.String"/>
+	<field name="canton" class="java.lang.String"/>
+	<field name="parroquia" class="java.lang.String"/>
+	<field name="codigo_postal" class="java.lang.String"/>
+	<field name="id_admin" class="java.lang.String"/>
+	<field name="id_factura" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="id_detalle" class="java.lang.String"/>
+	<field name="id_transaccion" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="iva" class="java.math.BigDecimal"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="id_tarifa" class="java.lang.String"/>
+	<field name="fecha_tarifa" class="java.sql.Date"/>
+	<field name="precio_mes" class="java.math.BigDecimal"/>
+	<field name="estadocuenta" class="java.lang.String"/>
+	<variable name="cliente_apellido_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{cliente_apellido}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="78" y="0" width="384" height="45" uuid="d10d8255-09da-4470-9d74-1e077f4f44a5"/>
+				<textElement>
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[FACTURA ELÉCTRICA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="423" y="0" width="132" height="32" uuid="64e7fc28-5421-4157-ba74-778bb40b539c"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_factura}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="190" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="10" width="52" height="20" uuid="15e12758-e592-409c-bea4-df9917e72871"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÉDULA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="46" width="100" height="20" uuid="2baec1e0-0d75-4c2c-8b11-033917146da7"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="46" width="236" height="20" uuid="c9a34c60-14b4-4497-b4d6-158829d38fc9"/>
+				<textFieldExpression><![CDATA[$F{cliente_apellido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="46" width="52" height="20" uuid="1b40d778-c5d6-4145-b85f-11ebcdfe0013"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="84" width="100" height="20" uuid="f221a631-902d-4634-8565-acd975ef312e"/>
+				<textFieldExpression><![CDATA[$F{provincia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="84" width="100" height="20" uuid="3d906bcd-2cd5-4cf3-90fa-fe368f156680"/>
+				<textFieldExpression><![CDATA[$F{canton}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="84" width="100" height="20" uuid="479a8864-f344-4078-afcd-595421ab2874"/>
+				<textFieldExpression><![CDATA[$F{parroquia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="129" width="300" height="20" uuid="7c037734-8fca-4287-9747-c47f9a9114e0"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="84" width="67" height="20" uuid="b34b6232-d077-4b58-b2d8-7a0298142d6a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UBICACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="129" width="62" height="20" uuid="60b80919-42d5-410d-918b-f67808f82ef2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="403" y="10" width="152" height="20" uuid="d50498bb-117d-4938-86ad-68470a55b9f3"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="31" y="169" width="69" height="20" uuid="f1e731b5-4de3-4bbf-8064-3d2517308436"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="169" width="69" height="20" uuid="31e5a949-b81d-4bb9-a0b0-45c5371c0cef"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DETALLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="170" width="69" height="20" uuid="d3441994-fed1-431b-85f3-ef70f13db835"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="10" width="100" height="20" uuid="5abbdcf9-88a5-4ddb-957e-ae803c47e4d0"/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="131" y="12" width="140" height="20" uuid="ac6da607-3b7e-48f9-a860-4c4b147614e0"/>
+				<text><![CDATA[ENERGIA ELECRICA MES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="271" y="12" width="90" height="20" uuid="5e59698c-de8c-4666-912e-4fc480032e01"/>
+				<textFieldExpression><![CDATA[$F{fecha_tarifa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="31" y="12" width="100" height="20" uuid="f7968c8e-b5a6-4711-9144-31d221697235"/>
+				<textFieldExpression><![CDATA[$F{id_tarifa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="12" width="100" height="20" uuid="9be05f2d-728d-408b-b93e-4cf17e7aeeed"/>
+				<textFieldExpression><![CDATA[$F{precio_mes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="344" y="51" width="52" height="20" uuid="d881354b-c357-4aa5-8d6e-fb9f914aaad7"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="31" width="54" height="20" uuid="a644c042-b6f1-46b5-811b-a37ebc330773"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="403" y="51" width="100" height="20" uuid="5c821b43-2054-4718-ab82-d81d021004cb"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="31" width="100" height="20" uuid="b27e9497-0a58-4873-a9ba-75d503312e0c"/>
+				<textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="11" width="100" height="20" uuid="91a0697a-e4ed-4f13-85f7-53dcea1d9b2b"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="11" width="66" height="20" uuid="dfcb1a0b-5ee4-451b-9067-7b7cb7b66e20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="37" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
